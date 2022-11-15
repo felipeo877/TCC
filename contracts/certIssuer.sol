@@ -6,7 +6,6 @@
 
 pragma solidity >= 0.8.9;
 
-
 contract certIssuer{
     struct Dado{
         string Hash;
@@ -30,8 +29,6 @@ contract certIssuer{
     }
 
        mapping(uint => Dado) dados;
-
-
 
     function compareStrings(string memory _a, string memory _b) private pure returns (bool) {
         return keccak256(abi.encodePacked(_a)) == keccak256(abi.encodePacked(_b));
@@ -75,7 +72,6 @@ contract certIssuer{
         return indice;
     }
 
-
     function buscaCertPorHash(string memory _hash) public view returns (Dado[] memory) {
         Dado[] memory indice = new Dado[](1);
 
@@ -93,8 +89,7 @@ contract certIssuer{
              Dado storage dado = dados[i];
             if (compareStrings(dado.cpf, _cpf) == true) {
                  indice[i] = dado; 
-  
-            } 
+              } 
         }
         return indice;
     }

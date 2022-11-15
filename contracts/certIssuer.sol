@@ -65,15 +65,6 @@ contract certIssuer{
         }
         return count+1;
     }
-    function certExistsByCpf(string memory _cpf) private view returns (uint) {
-        for (uint i = 0; i < count; i++){
-            Dado storage dado = dados[i];
-            if (compareStrings(dado.cpf, _cpf) == true) {
-                return i; 
-            } 
-        }
-        return count+1;
-    }
 
     function getAllCertInfo() public view returns (Dado[] memory) {
         Dado[] memory indice = new Dado[](count);
@@ -96,20 +87,15 @@ contract certIssuer{
         return indice;        
     }	
 	
-	function buscaCertPorCpf(string memory _cpf) public view returns (Dado[] memory) {
-    	uint indexValue = certExistsByCpf(_cpf);
+    function buscaCertPorCpf(string memory _cpf) public view returns (Dado[] memory) {
         Dado[] memory indice = new Dado[](count);
         for (uint i = 0; i < count; i++){
-	
-	    if (indexValue <= count) {
-            Dado storage dado = dados[indexValue];
-            indice[i] = dado;   
-			}
-		}
+             Dado storage dado = dados[i];
+            if (compareStrings(dado.cpf, _cpf) == true) {
+                 indice[i] = dado; 
+  
+            } 
+        }
         return indice;
-    }
-
-	    function getcount() public view returns (uint) {
-        return count;
     }
 }
